@@ -44,7 +44,7 @@ document.addEventListener('keyup',function(event)
     {
       start = true;
       console.log(start);
-      score = 0;
+      score = 0;  
       document.querySelector('#score').textContent = score;
       randomIndex = getRandomIndex(words.length);
       document.querySelector('#word').textContent = words[randomIndex];
