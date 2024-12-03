@@ -7,6 +7,10 @@ let timer;
 let score = 0;
 let word = 0;
 
+function getRandomIndex(arrayLength) 
+  {
+  return Math.floor(Math.random() * arrayLength);
+  }
 
 // Array
 const words = [
@@ -40,7 +44,9 @@ document.addEventListener('keyup',function(event)
     {
       start = true;
       console.log(start);
-      randomIndex = Math.floor(Math.random() * words.length);
+      score = 0;
+      document.querySelector('#score').textContent = score;
+      randomIndex = getRandomIndex(words.length);
       document.querySelector('#word').textContent = words[randomIndex];
       console.log(randomIndex);
       document.querySelector('#end-game-container').style.display = 'none';
@@ -74,11 +80,10 @@ document.addEventListener('keyup',function(event)
     if(word === words[randomIndex])
       {
       time += 3;
-      time = (Math.round(time * 10) / 10);
       document.querySelector('#time').textContent = time;
       score += 1
       document.querySelector('#score').textContent = score;
-      randomIndex = Math.floor(Math.random() * words.length);
+      randomIndex = getRandomIndex(words.length);
       document.querySelector('#word').textContent = words[randomIndex];
       console.log(words[randomIndex]);
       event.target.value = '';
