@@ -11,6 +11,10 @@ function getRandomIndex(arrayLength)
   {
   return Math.floor(Math.random() * arrayLength);
   }
+function updateTextContent(selector, text) 
+  {
+  document.querySelector(selector).textContent = text;
+  }
 
 // Array
 const words = [
@@ -45,7 +49,7 @@ document.addEventListener('keyup',function(event)
       start = true;
       console.log(start);
       score = 0;  
-      document.querySelector('#score').textContent = score;
+      updateTextContent('#score',score)
       randomIndex = getRandomIndex(words.length);
       document.querySelector('#word').textContent = words[randomIndex];
       console.log(randomIndex);
@@ -58,14 +62,14 @@ document.addEventListener('keyup',function(event)
       {
         time -= 0.1;
         time = (Math.round(time * 10) / 10);
-        document.querySelector('#time').textContent = time;
+        updateTextContent('#time',time)
         if(time <= 0)
         {
           time = tottime;
           start = false;
-          clearInterval(timer);
-          document.querySelector('#time').textContent = time;
-          document.querySelector('#word').textContent = '';
+          clearInterval(timer);          
+          updateTextContent('#time',time);
+           updateTextContent('#word','');
           document.querySelector('#end-game-container').style.display = 'flex';
           document.querySelector('#end-game-container').textContent = 'You lose! your score: '+score;
         }
@@ -80,9 +84,9 @@ document.addEventListener('keyup',function(event)
     if(word === words[randomIndex])
       {
       time += 3;
-      document.querySelector('#time').textContent = time;
+      updateTextContent('#time',time)
       score += 1
-      document.querySelector('#score').textContent = score;
+      updateTextContent('#score',score)
       randomIndex = getRandomIndex(words.length);
       document.querySelector('#word').textContent = words[randomIndex];
       console.log(words[randomIndex]);
