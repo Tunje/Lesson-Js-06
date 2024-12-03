@@ -15,6 +15,10 @@ function updateTextContent(selector, text)
   {
   document.querySelector(selector).textContent = text;
   }
+function uppdateDisplayFunction(selector, type) 
+  {
+  document.querySelector(selector).style.display = type;
+  }
 
 // Array
 const words = [
@@ -51,9 +55,9 @@ document.addEventListener('keyup',function(event)
       score = 0;  
       updateTextContent('#score',score)
       randomIndex = getRandomIndex(words.length);
-      document.querySelector('#word').textContent = words[randomIndex];
+      updateTextContent('#word', words[randomIndex]);
       console.log(randomIndex);
-      document.querySelector('#end-game-container').style.display = 'none';
+      uppdateDisplayFunction('#end-game-container', 'none');
     }
     /// countdown
     if(start === true)
@@ -69,9 +73,9 @@ document.addEventListener('keyup',function(event)
           start = false;
           clearInterval(timer);          
           updateTextContent('#time',time);
-           updateTextContent('#word','');
-          document.querySelector('#end-game-container').style.display = 'flex';
-          document.querySelector('#end-game-container').textContent = 'You lose! your score: '+score;
+          updateTextContent('#word','');
+          uppdateDisplayFunction('#end-game-container', 'flex');
+          updateTextContent('#end-game-container','You lose! your score: '+score);
         }
       }, 100);
     }
@@ -88,7 +92,7 @@ document.addEventListener('keyup',function(event)
       score += 1
       updateTextContent('#score',score)
       randomIndex = getRandomIndex(words.length);
-      document.querySelector('#word').textContent = words[randomIndex];
+      updateTextContent('#word', words[randomIndex]);
       console.log(words[randomIndex]);
       event.target.value = '';
       }
