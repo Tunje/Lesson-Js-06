@@ -7,18 +7,27 @@ let timer;
 let score = 0;
 let word = 0;
 
+// DOM elements
+const scoreElement = document.querySelector('#score');
+const timeElement = document.querySelector('#time');
+const wordElement = document.querySelector('#word');
+const endGameContainer = document.querySelector('#end-game-container');
+
+
 function getRandomIndex(arrayLength) 
   {
   return Math.floor(Math.random() * arrayLength);
   }
-function updateTextContent(selector, text) 
-  {
-  document.querySelector(selector).textContent = text;
-  }
-function uppdateDisplayFunction(selector, type) 
-  {
-  document.querySelector(selector).style.display = type;
-  }
+  function updateTextContent(element, text) 
+    {
+    element.textContent = text;
+    }
+  
+  function uppdateDisplayFunction(element, type) 
+    {
+    element.style.display = type; // Directly use the passed DOM element
+    }
+  
 
 // Array
 const words = [
@@ -53,11 +62,11 @@ document.addEventListener('keyup',function(event)
       start = true;
       console.log(start);
       score = 0;  
-      updateTextContent('#score',score)
+      updateTextContent(scoreElement,score)
       randomIndex = getRandomIndex(words.length);
-      updateTextContent('#word', words[randomIndex]);
+      updateTextContent(wordElement, words[randomIndex]);
       console.log(randomIndex);
-      uppdateDisplayFunction('#end-game-container', 'none');
+      uppdateDisplayFunction(endGameContainer, 'none');
     }
     /// countdown
     if(start === true)
@@ -66,16 +75,16 @@ document.addEventListener('keyup',function(event)
       {
         time -= 0.1;
         time = (Math.round(time * 10) / 10);
-        updateTextContent('#time',time)
+        updateTextContent(timeElement,time)
         if(time <= 0)
         {
           time = tottime;
           start = false;
           clearInterval(timer);          
-          updateTextContent('#time',time);
-          updateTextContent('#word','');
-          uppdateDisplayFunction('#end-game-container', 'flex');
-          updateTextContent('#end-game-container','You lose! your score: '+score);
+          updateTextContent(timeElement,time);
+          updateTextContent(wordElement,'');
+          uppdateDisplayFunction(endGameContainer, 'flex');
+          updateTextContent(endGameContainer,'You lose! your score: '+score);
         }
       }, 100);
     }
@@ -88,11 +97,11 @@ document.addEventListener('keyup',function(event)
     if(word === words[randomIndex])
       {
       time += 3;
-      updateTextContent('#time',time)
+      updateTextContent(timeElement,time)
       score += 1
-      updateTextContent('#score',score)
+      updateTextContent(scoreElement,score)
       randomIndex = getRandomIndex(words.length);
-      updateTextContent('#word', words[randomIndex]);
+      updateTextContent(wordElement, words[randomIndex]);
       console.log(words[randomIndex]);
       event.target.value = '';
       }
